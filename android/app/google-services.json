@@ -36,9 +36,9 @@
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:245936422622:android:d8e9d7940f02cb1aea0c4f",
+        "mobilesdk_app_id": "1:245936422622:android:6390c0b035d38205ea0c4f",
         "android_client_info": {
-          "package_name": "com.breno.loja"
+          "package_name": "com.breno.loja.loja"
         }
       },
       "oauth_client": [
