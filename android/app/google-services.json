@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "245936422622",
+    "project_id": "loja-flutter-f41ed",
+    "storage_bucket": "loja-flutter-f41ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245936422622:android:65b73787f44fa647ea0c4f",
+        "android_client_info": {
+          "package_name": "br.com.brenomacedo.virtual_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245936422622-62s1d917d6tav26lb33m5tfsu1kbn1rr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBilmEDgnOfLOLnJqafkpypTQxuTLRkuwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245936422622-62s1d917d6tav26lb33m5tfsu1kbn1rr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245936422622:android:d8e9d7940f02cb1aea0c4f",
+        "android_client_info": {
+          "package_name": "com.breno.loja"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245936422622-62s1d917d6tav26lb33m5tfsu1kbn1rr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBilmEDgnOfLOLnJqafkpypTQxuTLRkuwI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245936422622-62s1d917d6tav26lb33m5tfsu1kbn1rr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
