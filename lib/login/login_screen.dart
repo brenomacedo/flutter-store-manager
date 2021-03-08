@@ -33,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     return Container(
                       height: 50,
                       child: ElevatedButton(
-                        onPressed: snapshot.hasData ? () {} : null,
+                        onPressed: snapshot.hasData ? _loginBloc.submit : null,
                         child: Text('Entrar'),
                         style: ButtonStyle(
                           backgroundColor:  MaterialStateProperty.resolveWith<Color>((state) {
