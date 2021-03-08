@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loja/validators/login_validators.dart';
 import 'package:rxdart/rxdart.dart';
@@ -9,10 +12,17 @@ enum LoginState {
 
 class LoginBloc with LoginValidators implements BlocBase {
 
+  StreamSubscription _streamSubscription;
+
   LoginBloc() {
-    FirebaseAuth.instance.authStateChanges().listen((user) {
+    FirebaseAuth.instance.authStateChanges().listen((user) async {
       if(user != null) {
-        print('usuario logou com sucesso!');
+        if(await verifyPrivileges(user)) {
+          _stateController.add(LoginState.SUCCESS);
+        } else {
+          FirebaseAuth.instance.signOut();
+          _stateController.add(LoginState.FAIL);
+        }
         FirebaseAuth.instance.signOut();
       } else {
         _stateController.add(LoginState.IDLE);
@@ -39,8 +49,8 @@ class LoginBloc with LoginValidators implements BlocBase {
 
     _stateController.add(LoginState.LOADING);
 
-    FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((value) {
-
+    FirebaseAuth.instance.signInWithEmailAndPassword(email: email, password: password).then((user) async {
+  
     }).catchError((error) {
       _stateController.add(LoginState.FAIL);
     });
@@ -56,6 +66,15 @@ class LoginBloc with LoginValidators implements BlocBase {
     _emailController.close();
     _passwordController.close();
     _stateController.close();
+    _streamSubscription.cancel();
+  }
+
+  Future<bool> verifyPrivileges(User user) async {
+    return await FirebaseFirestore.instance.collection('admins').doc(user.uid).get().then((doc) {
+      return doc.data() != null;
+    }).catchError((error) {
+      return false;
+    });
   }
 
   @override
