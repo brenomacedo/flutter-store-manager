@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loja/blocs/login_bloc.dart';
 import 'package:loja/widgets/input_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -7,6 +8,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  final _loginBloc = LoginBloc();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,18 +23,31 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Icon(Icons.store_mall_directory, size: 160, color: Colors.pinkAccent),
-                InputField(hint: 'Usuário', icon: Icons.person_outline, obscure: false),
-                InputField(hint: 'Senha', icon: Icons.lock_outline, obscure: true),
+                InputField(hint: 'Usuário', icon: Icons.person_outline, obscure: false,
+                  stream: _loginBloc.outEmail, onChanged: _loginBloc.changeEmail),
+                InputField(hint: 'Senha', icon: Icons.lock_outline, obscure: true,
+                  stream: _loginBloc.outPassword, onChanged: _loginBloc.changePassword),
                 SizedBox(height: 32),
-                Container(
-                  height: 50,
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Entrar'),
-                    style: ButtonStyle(
-                      backgroundColor:  MaterialStateProperty.all(Colors.pinkAccent),
-                    ),
-                  ),
+                StreamBuilder(
+                  builder: (context, snapshot) {
+                    return Container(
+                      height: 50,
+                      child: ElevatedButton(
+                        onPressed: snapshot.hasData ? () {} : null,
+                        child: Text('Entrar'),
+                        style: ButtonStyle(
+                          backgroundColor:  MaterialStateProperty.resolveWith<Color>((state) {
+                            if(state.contains(MaterialState.disabled)) {
+                              return Colors.pinkAccent.withAlpha(140);
+                            } else {
+                              return Colors.pinkAccent;
+                            }
+                          }),
+                        ),
+                      ),
+                    );
+                  },
+                  stream: _loginBloc.outSubmitValid,
                 )
               ],
             ),
