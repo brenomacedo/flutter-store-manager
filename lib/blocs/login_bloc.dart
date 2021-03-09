@@ -10,7 +10,7 @@ enum LoginState {
   IDLE, LOADING, SUCCESS, FAIL
 }
 
-class LoginBloc with LoginValidators implements BlocBase {
+class LoginBloc extends BlocBase with LoginValidators {
 
   StreamSubscription _streamSubscription;
 
@@ -57,12 +57,8 @@ class LoginBloc with LoginValidators implements BlocBase {
   }
 
   @override
-  void addListener(listener) {
-    
-  }
-
-  @override
   void dispose() {
+    super.dispose();
     _emailController.close();
     _passwordController.close();
     _stateController.close();
@@ -76,17 +72,4 @@ class LoginBloc with LoginValidators implements BlocBase {
       return false;
     });
   }
-
-  @override
-  void notifyListeners() {
-    
-  }
-
-  @override
-  void removeListener(listener) {
-    
-  }
-
-  @override
-  bool get hasListeners => throw UnimplementedError();
 }

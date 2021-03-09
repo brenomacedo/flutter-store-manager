@@ -2,9 +2,11 @@ import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:rxdart/rxdart.dart';
 
-class UserBloc implements BlocBase {
+class UserBloc extends BlocBase {
 
-  final _usersController = BehaviorSubject();
+  final _usersController = BehaviorSubject<List>();
+
+  Stream<List> get outUsers => _usersController.stream;
 
   Map<String, Map<String, dynamic>> _users = {};
 
@@ -61,25 +63,11 @@ class UserBloc implements BlocBase {
   void _unsubscribeToOrders(String uid) {
     _users[uid]['subscription'].cancel();
   }
-  
-  @override
-  void addListener(listener) {
-  }
 
   @override
   void dispose() {
+    super.dispose();
     _usersController.close();
-  }
-
-  @override
-  bool get hasListeners => throw UnimplementedError();
-
-  @override
-  void notifyListeners() {
-  }
-
-  @override
-  void removeListener(listener) {
   }
 
   
