@@ -1,5 +1,6 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
+import 'package:loja/blocs/orders_bloc.dart';
 import 'package:loja/blocs/user_bloc.dart';
 import 'package:loja/tabs/orders_tab.dart';
 import 'package:loja/tabs/users_tab.dart';
@@ -75,7 +76,7 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(color: Colors.blue)
             ],
           ),
-          blocs: [Bloc((i) => UserBloc())],
+          blocs: [Bloc((i) => UserBloc()), Bloc((i) => OrdersBloc())],
         )
       )
     );
