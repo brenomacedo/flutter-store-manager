@@ -69,7 +69,14 @@ class _ProductScreenState extends State<ProductScreen> {
               padding: EdgeInsets.all(16),
               children: [
                 Text('Imagens', style: TextStyle(color: Colors.grey[850], fontSize: 12)),
-                ImagesWidget(),
+                ImagesWidget(
+                  context: context,
+                  initialValue: snapshot.data['images'],
+                  onSaved: (l) {},
+                  validator: (l) {
+                    return 'a';
+                  },
+                ),
                 TextFormField(
                   initialValue: snapshot.data['title'],
                   style: fieldStyle,
