@@ -15,12 +15,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
 
   PageController _pageController;
+  OrdersBloc _ordersBloc;
   int _page = 0;
 
   @override
   void initState() {
     super.initState();
     _pageController = PageController();
+    _ordersBloc = OrdersBloc();
   }
 
 
@@ -32,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-    final OrdersBloc _ordersBloc = BlocProvider.getBloc<OrdersBloc>();
 
     Widget _buildFloating() {
       switch(_page) {
@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ProductsTab()
             ],
           ),
-          blocs: [Bloc((i) => UserBloc()), Bloc((i) => OrdersBloc())],
+          blocs: [Bloc((i) => UserBloc()), Bloc((i) => _ordersBloc)],
         )
       ),
       floatingActionButton: _buildFloating(),
