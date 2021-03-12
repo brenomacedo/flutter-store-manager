@@ -47,11 +47,36 @@ class _ProductScreenState extends State<ProductScreen> with ProductValidator {
       backgroundColor: Colors.grey[850],
       appBar: AppBar(
         elevation: 0,
-        title: Text('Criar produsto'),
+        title: StreamBuilder<bool>(
+          initialData: false,
+          stream: _productBloc.outCreated,
+          builder: (context, snapshot) {
+            return Text(snapshot.data ? 'Editar produto' : 'Criar produto');
+          },
+        ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.remove),
-            onPressed: () {},
+          StreamBuilder<bool>(
+            stream: _productBloc.outCreated,
+            initialData: false,
+            builder: (context, snapshot) {
+              if(snapshot.data == true)
+                return StreamBuilder<bool>(
+                  stream: _productBloc.outLoading,
+                  initialData: false,
+                  builder: (context, snapshot) {
+                    return IconButton(
+                      icon: Icon(Icons.remove),
+                      onPressed: snapshot.data ? null : () {
+                        _productBloc.deleteProduct();
+                        Navigator.of(context).pop();
+                      }
+                    );
+                  },
+                );
+              
+              return Container();
+              
+            },
           ),
           StreamBuilder<bool>(
             stream: _productBloc.outLoading,
