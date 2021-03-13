@@ -6,6 +6,7 @@ import 'package:loja/blocs/user_bloc.dart';
 import 'package:loja/tabs/orders_tab.dart';
 import 'package:loja/tabs/products_tab.dart';
 import 'package:loja/tabs/users_tab.dart';
+import 'package:loja/widgets/edit_category_dialog.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -67,6 +68,15 @@ class _HomeScreenState extends State<HomeScreen> {
             overlayColor: Colors.black
           );
         case 2:
+          return FloatingActionButton(
+            child: Icon(Icons.add),
+            backgroundColor: Colors.pinkAccent,
+            onPressed: () {
+              showDialog(context: context, builder: (context) {
+                return EditCategoryDialog();
+              });
+            },
+          );
         default:
           return null;
       }

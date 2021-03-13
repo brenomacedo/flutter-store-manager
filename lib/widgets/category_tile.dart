@@ -24,7 +24,9 @@ class CategoryTile extends StatelessWidget {
             ),
             onTap: () {
               showDialog(context: context, builder: (context) {
-                return EditCategoryDialog();
+                return EditCategoryDialog(
+                  category: category,
+                );
               });
             },
           ),
