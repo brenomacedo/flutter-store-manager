@@ -61,7 +61,7 @@ class CategoryBloc extends BlocBase {
 
     if(image != null) {
       UploadTask task = FirebaseStorage.instance.ref().child('icons')
-        .child('title').putFile(image);
+        .child(title).putFile(image);
       TaskSnapshot snap = await task.whenComplete(() => null);
       dataToUpdate['icon'] = await snap.ref.getDownloadURL();
     }
