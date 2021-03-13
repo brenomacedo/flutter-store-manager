@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:loja/blocs/product_bloc.dart';
 import 'package:loja/validators/product_validator.dart';
+import 'package:loja/widgets/add_product_sizes.dart';
 import 'package:loja/widgets/images_widget.dart';
 
 
@@ -134,6 +135,13 @@ class _ProductScreenState extends State<ProductScreen> with ProductValidator {
                         keyboardType: TextInputType.numberWithOptions(decimal: true),
                         onSaved: _productBloc.savePrice,
                         validator: validatePrice,
+                      ),
+                      SizedBox(height: 16),
+                      Text('Tamanhos', style: TextStyle(color: Colors.grey[850], fontSize: 12)),
+                      AddProductSizes(
+                        initialValue: snapshot.data['sizes'],
+                        onSaved: null,
+                        validator: null,
                       )
                     ],
                   );
